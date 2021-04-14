@@ -1,5 +1,5 @@
 const LegendaryModel = require('../models/LegendaryModel');
-const { v4: uuidv4 } = require('uuid'); 
+const { v4: uuidv4 } = require('uuid');
 
 const LegendariesService = {
     listLegendaries: () => {
@@ -47,9 +47,9 @@ const LegendariesService = {
         attack, 
         experience, 
         specialDefense
-        ) => {
-        const newLegendary = new LegendaryModel (
-            uuidv4(),
+        ) => {             
+        const newLegendary = new LegendaryModel(
+            uuidv4(), 
             name, 
             description, 
             type, 
