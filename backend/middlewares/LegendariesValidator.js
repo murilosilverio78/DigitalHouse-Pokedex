@@ -66,36 +66,7 @@ function validator(req, res, next) {
             .integer('Special Defense deve ser um número inteiro')
     });
 
-    // schema.validateSync(req.body, {abortEarly: false}).catch(function (err) {
-    //     res(err.errors)
-    // })
-    
-
-    // function teste (a) {
-    //     schema.validateSync(a, {abortEarly: false})
-    //     throw 'teste'
-
-    // }
-
-    // try {
-    //     teste(req.body)
-    // } catch (e) {
-    //     console.error(e.errors)
-    // }
-
-       
-    // // if (err) {
-    // //     console.log("err")
-    // // }
-    
-    // // err.errors
-    // //     console.log(err.errors)
-    // // })
-    
- 
-
-    // //res.send(err.errors)
-  
+   
  
     if (!schema.isValidSync(req.body)) {
         try {
