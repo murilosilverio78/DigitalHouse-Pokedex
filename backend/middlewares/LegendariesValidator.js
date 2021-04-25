@@ -19,17 +19,91 @@
 // ];
 
 // module.exports = validationList;
+const { ValidationError } = require('yup');
 const yup = require('yup');
 
 function validator(req, res, next) {
     const schema = yup.object().shape({
-        name: yup.string().required(),
-        type: yup.string().required(),
-        description: yup.string().required().min(10)
+        name: yup
+            .string()
+            .required('Preencha o campo do nome'),
+        type: yup
+            .string()
+            .required('Preencha o campo do tipo'),
+        description: yup
+            .string()
+            .required('Preencha o campo da descrição')
+            .min(10, 'A descrição deve ter pelo menos 10 caracteres'),
+        healthPoints: yup
+            .number()
+            .typeError('Health Points deve ser um número')
+            .positive('Health Points deve ser um número positivo')
+            .integer('Health Points deve ser um número inteiro'), 
+        specialAttack: yup
+            .number()
+            .typeError('Special Attack deve ser um número')
+            .positive('Special Attack deve ser um número positivo')
+            .integer('Special Attack deve ser um número inteiro'), 
+        defense: yup
+            .number()
+            .typeError('Defense deve ser um número')
+            .positive('Defense deve ser um número positivo')
+            .integer('Defense deve ser um número inteiro'), 
+        attack: yup
+            .number()
+            .typeError('Attack deve ser um número')
+            .positive('Attack deve ser um número positivo')
+            .integer('Attack deve ser um número inteiro'), 
+        experience: yup
+            .number()
+            .typeError('Experience deve ser um número')
+            .positive('Experience deve ser um número positivo')
+            .integer('Experience deve ser um número inteiro'), 
+        specialDefense: yup
+            .number()
+            .typeError('Special Defense deve ser um número')
+            .positive('Special Defense deve ser um número positivo')
+            .integer('Special Defense deve ser um número inteiro')
     });
 
+    // schema.validateSync(req.body, {abortEarly: false}).catch(function (err) {
+    //     res(err.errors)
+    // })
+    
+
+    // function teste (a) {
+    //     schema.validateSync(a, {abortEarly: false})
+    //     throw 'teste'
+
+    // }
+
+    // try {
+    //     teste(req.body)
+    // } catch (e) {
+    //     console.error(e.errors)
+    // }
+
+       
+    // // if (err) {
+    // //     console.log("err")
+    // // }
+    
+    // // err.errors
+    // //     console.log(err.errors)
+    // // })
+    
+ 
+
+    // //res.send(err.errors)
+  
+ 
     if (!schema.isValidSync(req.body)) {
-        return res.status(400).json({error: 'Invalid data'});
+        try {
+            schema.validateSync(req.body, {abortEarly: false})
+        } catch (error) {
+            res.send(error.errors)
+        } 
+        return    
     }
     
     next(); 
