@@ -11,3 +11,4 @@ router.post('/', validator, controller.create);
 router.put('/:id', validator, controller.update);
 
 module.exports = router;
+
