@@ -79,7 +79,8 @@ const LegendariesService = {
         experience,
         specialDefense) => {
 
-        const updatedLegendary = await database.Legendary.update({
+        const updatedLegendary = await database.Legendary.update(
+        {
             name, 
             description, 
             type, 
@@ -89,13 +90,17 @@ const LegendariesService = {
             attack, 
             experience, 
             specialDefense
-        }, {
-            where: {
+        }, 
+        {
+            where: 
+            {
                 id                
             }
-        });     
-
-        return updatedLegendary;  
+        }
+        );     
+        console.log(updatedLegendary)
+       // return updatedLegendary; 
+       return database.Legendary.findByPk(id) 
     },
     destroyLegendary: async(id) => {
         const destroyedLegendary = await database.Legendary.destroy({
